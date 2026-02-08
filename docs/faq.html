@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ - undebted. | Frequently Asked Questions</title>
+  <meta name="description" content="Frequently asked questions about undebted. and UNDBT tokens - learn about debt verification, token minting, burning, and how the project works.">
+  <link rel="icon" type="image/png" href="images/token.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: white; background-color: #0f172a; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    :root { --gold: #d4a634; --slate-600: #475569; --slate-700: #334155; --slate-800: #1e293b; }
+    .gold { color: var(--gold); }
+    .container { max-width: 56rem; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width: 640px) { .container { padding: 0 1.5rem; } }
+
+    nav { position: fixed; top: 0; width: 100%; z-index: 50; transition: all 0.3s; background: transparent; }
+    nav.scrolled { background: rgba(30,41,59,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--slate-600); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1rem; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    @media (min-width: 640px) { .nav-inner { padding: 0 1.5rem; } }
+    .nav-brand { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-brand img { width: 40px; height: 40px; border-radius: 50%; }
+    .nav-brand span { font-size: 1.5rem; font-weight: 900; }
+    .nav-links { display: none; gap: 2rem; }
+    .nav-links a { color: #e2e8f0; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; font-size: 0.875rem; }
+    .btn-ghost { background: transparent; color: #fbbf24; }
+    .btn-ghost:hover { color: #fcd34d; }
+    .btn-gold { background: var(--gold); color: black; }
+    .btn-gold:hover { background: #b8922a; }
+
+    .content { padding-top: 6rem; padding-bottom: 3rem; }
+    .content h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 1.5rem; }
+    @media (min-width: 768px) { .content h1 { font-size: 3.75rem; } }
+    .content .subtitle { font-size: 1.25rem; color: #e2e8f0; margin-bottom: 2rem; }
+    .faq-card { background: rgba(30,41,59,0.5); border: 1px solid #475569; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .faq-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--gold); margin-bottom: 0.75rem; }
+    .faq-card p { color: #e2e8f0; line-height: 1.8; }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/token.png" alt="undebted token">
+      <span>undebted.</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#claim">Claim Tokens</a>
+      <a href="index.html#metrics">Metrics</a>
+      <a href="whitepaper.html">Whitepaper</a>
+    </div>
+    <a href="index.html#claim" class="btn btn-gold">Connect Wallet</a>
+  </div>
+</nav>
+
+<div class="content">
+  <div class="container">
+    <a href="index.html" class="btn btn-ghost" style="margin-bottom:1rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.5rem;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Home
+    </a>
+
+    <h1>Frequently Asked <span class="gold">Questions</span></h1>
+    <p class="subtitle">Everything you need to know about UNDBT tokens</p>
+
+    <div class="faq-card">
+      <h3>What are UNDBT tokens?</h3>
+      <p>UNDBT tokens are blockchain-based assets that represent verified U.S. federal student loan debt. Each token is backed 1:1 by real debt, creating a transparent and tradeable representation of educational investment.</p>
+    </div>
+
+    <div class="faq-card">
+      <h3>How does debt verification work?</h3>
+      <p>We use secure credit bureau integration (like Experian or TransUnion) to verify your student loan debt. You authenticate directly with the credit bureau - we never see or store your personal information. They verify your student loan balance and send us only a unique verification ID and the amount.</p>
+    </div>
+
+    <div class="faq-card">
+      <h3>Is my personal information secure?</h3>
+      <p>Yes. We never store your SSN or personal data. All verification is done through secure, encrypted connections with credit bureaus. We only receive a unique verification ID and your student loan balance - nothing else.</p>
+    </div>
+
+    <div class="faq-card">
+      <h3>How do I get UNDBT tokens?</h3>
+      <p>Connect your crypto wallet (MetaMask or Coinbase Wallet), verify your student debt through our credit bureau verification system, and UNDBT tokens will be automatically minted to your wallet based on your verified debt amount.</p>
+    </div>
+
+    <div class="faq-card">
+      <h3>What can I do with UNDBT tokens?</h3>
+      <p>You can hold them as proof of your educational investment, trade them on compatible exchanges, or use them to participate in community governance decisions about debt relief programs.</p>
+    </div>
+
+    <div class="faq-card">
+      <h3>How does token burning help students?</h3>
+      <p>When donors burn UNDBT tokens, the equivalent debt amount is directly relieved for borrowers. This creates immediate, transparent impact that can be tracked on the blockchain.</p>
+    </div>
+
+    <div class="faq-card">
+      <h3>Is this a real blockchain project?</h3>
+      <p>This is currently a demonstration MVP. All blockchain interactions are simulated to showcase the concept and user experience of a functional undebted. token system.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('navbar');
+  if (window.scrollY > 0) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+});
+</script>
+</body>
+</html>

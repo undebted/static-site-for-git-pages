@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whitepaper - undebted. | Tokenizing Student Debt</title>
+  <meta name="description" content="undebted. Whitepaper - Transforming Student Debt Through Blockchain Technology. Learn about UNDBT tokens and our approach to community-driven debt relief.">
+  <link rel="icon" type="image/png" href="images/token.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: white; background-color: #0f172a; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    :root { --gold: #d4a634; --slate-600: #475569; --slate-700: #334155; --slate-800: #1e293b; }
+    .gold { color: var(--gold); }
+    .container { max-width: 56rem; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width: 640px) { .container { padding: 0 1.5rem; } }
+
+    nav { position: fixed; top: 0; width: 100%; z-index: 50; transition: all 0.3s; background: transparent; }
+    nav.scrolled { background: rgba(30,41,59,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--slate-600); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; padding: 0 1rem; display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    @media (min-width: 640px) { .nav-inner { padding: 0 1.5rem; } }
+    .nav-brand { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-brand img { width: 40px; height: 40px; border-radius: 50%; }
+    .nav-brand span { font-size: 1.5rem; font-weight: 900; }
+    .nav-links { display: none; gap: 2rem; }
+    .nav-links a { color: #e2e8f0; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; font-size: 0.875rem; }
+    .btn-ghost { background: transparent; color: #fbbf24; }
+    .btn-ghost:hover { color: #fcd34d; }
+    .btn-gold { background: var(--gold); color: black; }
+    .btn-gold:hover { background: #b8922a; }
+
+    .content { padding-top: 6rem; padding-bottom: 3rem; }
+    .content h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 1.5rem; }
+    @media (min-width: 768px) { .content h1 { font-size: 3.75rem; } }
+    .content .subtitle { font-size: 1.25rem; color: #e2e8f0; margin-bottom: 2rem; }
+    .section-card { background: rgba(30,41,59,0.5); padding: 1.5rem; border-radius: 0.75rem; border: 1px solid #475569; margin-bottom: 2rem; }
+    .section-card h2 { font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 1rem; }
+    .section-card h3 { font-size: 1.125rem; font-weight: 600; color: #fcd34d; margin-top: 1rem; margin-bottom: 0.5rem; }
+    .section-card p { color: #e2e8f0; line-height: 1.8; margin-bottom: 0.75rem; }
+    .section-card ul { list-style: disc; padding-left: 1.5rem; color: #e2e8f0; margin-top: 0.5rem; }
+    .section-card ul li { margin-bottom: 0.5rem; }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="images/token.png" alt="undebted token">
+      <span>undebted.</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="index.html#claim">Claim Tokens</a>
+      <a href="index.html#metrics">Metrics</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+    <a href="index.html#claim" class="btn btn-gold">Connect Wallet</a>
+  </div>
+</nav>
+
+<div class="content">
+  <div class="container">
+    <a href="index.html" class="btn btn-ghost" style="margin-bottom:1rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.5rem;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Back to Home
+    </a>
+
+    <h1>undebted. <span class="gold">Whitepaper</span></h1>
+    <p class="subtitle">Transforming Student Debt Through Blockchain Technology</p>
+
+    <div class="section-card">
+      <h2>Executive Summary</h2>
+      <p>undebted. (UNDBT) tokens represent a revolutionary approach to addressing the student debt crisis through blockchain technology. By tokenizing verified student loan debt, we create a transparent, tradeable asset class that enables community-driven debt relief while providing borrowers with new financial opportunities. Rise from debt.</p>
+    </div>
+
+    <div class="section-card">
+      <h2>The Problem</h2>
+      <p>The U.S. student debt crisis has reached unprecedented levels, with over $1.7 trillion in outstanding loans affecting 45 million borrowers. Traditional debt relief mechanisms are slow, bureaucratic, and often fail to reach those most in need.</p>
+      <ul>
+        <li>Average debt per borrower: $37,000</li>
+        <li>Default rates continue to rise</li>
+        <li>Limited options for debt relief</li>
+        <li>Lack of transparency in loan servicer practices</li>
+      </ul>
+    </div>
+
+    <div class="section-card">
+      <h2>Our Solution</h2>
+      <p>UNDBT tokens create a direct bridge between borrowers and supporters, enabling immediate, transparent debt relief through blockchain technology. Each token represents $1 of verified student debt, creating a 1:1 backing that ensures real-world impact.</p>
+    </div>
+
+    <div class="section-card">
+      <h2>Technical Implementation</h2>
+      <h3>Debt Verification</h3>
+      <p>Secure integration with federal student loan databases enables real-time verification of debt amounts and borrower status.</p>
+      <h3>Token Minting</h3>
+      <p>Upon successful verification, UNDBT tokens are minted at a 1:1 ratio with verified debt amounts, creating transparent backing.</p>
+      <h3>Burning Mechanism</h3>
+      <p>Token burning directly reduces debt burdens, with smart contracts ensuring immediate and verifiable impact.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('navbar');
+  if (window.scrollY > 0) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+});
+</script>
+</body>
+</html>

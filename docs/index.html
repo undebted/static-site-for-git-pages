@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>undebted. - Tokenizing Student Debt | Rise from Debt</title>
+  <meta name="description" content="Transform your student loan burden into crypto assets. Each UNDBT token represents $1 of verified U.S. federal student loan debt. Rise from debt.">
+  <meta property="og:title" content="undebted. - Tokenizing Student Debt">
+  <meta property="og:description" content="Transform your student loan burden into crypto assets. Rise from debt.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/png" href="images/token.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; color: white; background-color: #1e293b; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; }
+
+    :root {
+      --gold: #d4a634;
+      --gold-light: #e8c45a;
+      --gold-dark: #b8922a;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-800: #1e293b;
+      --slate-900: #0f172a;
+      --slate-950: #020617;
+    }
+    .gold { color: var(--gold); }
+    .bg-gold { background-color: var(--gold); }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 1rem; }
+    @media (min-width: 640px) { .container { padding: 0 1.5rem; } }
+    @media (min-width: 1024px) { .container { padding: 0 2rem; } }
+
+    /* NAV */
+    nav { position: fixed; top: 0; width: 100%; z-index: 50; transition: all 0.3s; background: transparent; }
+    nav.scrolled { background: rgba(30,41,59,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--slate-600); }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; }
+    .nav-brand { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-brand img { width: 40px; height: 40px; border-radius: 50%; }
+    .nav-brand span { font-size: 1.5rem; font-weight: 900; }
+    .nav-links { display: none; gap: 2rem; }
+    .nav-links a { color: #e2e8f0; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    @media (min-width: 768px) { .nav-links { display: flex; } }
+    .btn { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem 1.5rem; border-radius: 0.5rem; font-weight: 600; border: none; cursor: pointer; transition: all 0.2s; font-size: 1rem; }
+    .btn-gold { background: var(--gold); color: black; }
+    .btn-gold:hover { background: var(--gold-dark); }
+    .btn-white { background: white; color: black; border: 2px solid white; }
+    .btn-white:hover { background: #f1f5f9; }
+    .btn-outline { background: transparent; border: 2px solid var(--gold); color: var(--gold); }
+    .btn-outline:hover { background: var(--gold); color: black; }
+    .btn-lg { padding: 1rem 2rem; font-size: 1.125rem; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; background: var(--slate-700); padding-top: 80px; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(30,41,59,0.4), rgba(51,65,85,0.2), transparent); }
+    .hero-grid { display: grid; gap: 3rem; align-items: center; position: relative; z-index: 10; }
+    @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+    .badge { display: inline-flex; align-items: center; background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); color: #fbbf24; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; margin-bottom: 1.5rem; }
+    .badge svg { margin-right: 0.5rem; width: 16px; height: 16px; }
+    .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 1.5rem; line-height: 1; }
+    @media (min-width: 768px) { .hero h1 { font-size: 6rem; } }
+    .hero p { font-size: 1.25rem; color: #e2e8f0; margin-bottom: 2rem; line-height: 1.8; }
+    @media (min-width: 768px) { .hero p { font-size: 1.5rem; } }
+    .hero-buttons { display: flex; flex-direction: column; gap: 1rem; }
+    @media (min-width: 640px) { .hero-buttons { flex-direction: row; } }
+    .hero-image { display: flex; justify-content: center; }
+    .hero-image img { max-width: 400px; width: 100%; border-radius: 16px; filter: drop-shadow(0 25px 25px rgba(0,0,0,0.25)); }
+
+    /* SECTIONS */
+    section { padding: 5rem 0; }
+    .section-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 1.5rem; text-align: center; }
+    @media (min-width: 768px) { .section-title { font-size: 3.75rem; } }
+    .section-subtitle { font-size: 1.25rem; color: #cbd5e1; max-width: 48rem; margin: 0 auto 4rem; text-align: center; }
+
+    /* CARDS */
+    .card { background: rgba(30,41,59,0.5); border: 1px solid var(--slate-600); border-radius: 0.75rem; overflow: hidden; transition: border-color 0.2s; }
+    .card:hover { border-color: var(--gold); }
+    .card-body { padding: 2rem; }
+    .card-icon { width: 64px; height: 64px; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+    .card-icon.gold-bg { background: rgba(212,166,52,0.2); }
+    .card-icon.green-bg { background: rgba(34,197,94,0.2); }
+    .card-icon.orange-bg { background: rgba(249,115,22,0.2); }
+    .card-icon.blue-bg { background: rgba(59,130,246,0.2); }
+    .card h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .card p { color: #cbd5e1; }
+
+    /* GRID */
+    .grid-2 { display: grid; gap: 2rem; }
+    .grid-3 { display: grid; gap: 2rem; }
+    .grid-4 { display: grid; gap: 2rem; }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 768px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+
+    /* ABOUT */
+    .about { background: var(--slate-900); }
+
+    /* CLAIM */
+    .claim { background: var(--slate-800); }
+    .claim-card { background: rgba(51,65,85,0.4); border: 1px solid var(--slate-600); border-radius: 0.75rem; }
+    .claim-card .card-body { padding: 2rem 3rem; }
+    .step-header { display: flex; align-items: center; margin-bottom: 1.5rem; }
+    .step-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: 700; font-size: 0.875rem; }
+    .step-num.active { background: var(--gold); color: black; }
+    .step-num.inactive { background: #4b5563; color: white; }
+    .step-header h3 { font-size: 1.5rem; font-weight: 700; }
+    .info-box { padding: 1rem; border-radius: 0.5rem; }
+    .info-box.amber { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); }
+    .info-box.slate { background: rgba(51,65,85,0.6); border: 1px solid var(--slate-600); }
+    .dashed-box { border: 2px dashed var(--slate-600); border-radius: 0.75rem; padding: 3rem; text-align: center; }
+    .dashed-box svg { margin: 0 auto 1rem; }
+    .verification-box { border: 2px solid var(--gold); border-radius: 0.75rem; padding: 2rem; text-align: center; }
+    .verification-icon { width: 64px; height: 64px; background: rgba(212,166,52,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; }
+    .security-badges { display: flex; align-items: center; gap: 1rem; justify-content: center; font-size: 0.75rem; color: #9ca3af; margin-top: 1rem; }
+    .security-badges span { display: flex; align-items: center; gap: 0.25rem; }
+    .banner-img { width: 100%; max-width: 42rem; margin: 0 auto 1.5rem; border-radius: 0.75rem; border: 1px solid var(--slate-600); display: block; }
+
+    /* METRICS */
+    .metrics { background: var(--slate-900); }
+    .metric-card .card-body { padding: 2rem; text-align: center; }
+    .metric-value { font-size: 2.5rem; font-weight: 900; color: var(--gold); margin-bottom: 0.5rem; }
+    @media (min-width: 768px) { .metric-value { font-size: 3rem; } }
+    .metric-label { color: #cbd5e1; }
+    .metric-change { font-size: 0.875rem; color: #4ade80; margin-top: 0.5rem; }
+    .distribution-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .distribution-bar span:first-child { color: #cbd5e1; }
+    .bar-container { display: flex; align-items: center; }
+    .bar-bg { width: 128px; height: 8px; background: var(--slate-700); border-radius: 9999px; margin-right: 0.75rem; }
+    .bar-fill { height: 8px; background: var(--gold); border-radius: 9999px; }
+    .bar-value { font-size: 0.875rem; }
+    .activity-item { display: flex; align-items: center; justify-content: space-between; padding: 1rem; background: rgba(51,65,85,0.6); border-radius: 0.75rem; margin-bottom: 0.75rem; }
+    .activity-dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 0.75rem; flex-shrink: 0; }
+    .activity-dot.green { background: #4ade80; }
+    .activity-dot.red { background: #f87171; }
+    .activity-dot.amber { background: #fbbf24; }
+    .activity-left { display: flex; align-items: center; }
+    .activity-type { font-weight: 600; }
+    .activity-addr { font-size: 0.875rem; color: #9ca3af; }
+    .text-green { color: #4ade80; }
+    .text-red { color: #f87171; }
+    .text-amber { color: #fbbf24; }
+
+    /* BURN */
+    .burn { background: var(--slate-800); }
+    .burn-grid { display: grid; gap: 3rem; align-items: center; }
+    @media (min-width: 1024px) { .burn-grid { grid-template-columns: 1fr 1fr; } }
+    .burn-step { display: flex; align-items: flex-start; margin-bottom: 1rem; }
+    .burn-step-num { width: 24px; height: 24px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem; margin-top: 4px; flex-shrink: 0; font-size: 0.75rem; font-weight: 700; color: black; }
+    .burn-step-title { font-weight: 600; margin-bottom: 0.25rem; }
+    .burn-step-desc { color: #cbd5e1; }
+    .burn-form { background: rgba(51,65,85,0.6); border: 1px solid var(--slate-600); border-radius: 1rem; padding: 2rem; }
+    .burn-form h4 { font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem; }
+    .form-label { display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .form-display { background: rgba(51,65,85,0.5); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1.5rem; }
+    .form-display .value { font-size: 1.5rem; font-weight: 700; color: var(--gold); }
+    .form-display .label { font-size: 0.875rem; color: #cbd5e1; }
+    .form-input-wrap { position: relative; margin-bottom: 1.5rem; }
+    .form-input { width: 100%; background: rgba(51,65,85,0.5); border: 1px solid var(--slate-600); color: white; padding: 0.75rem 4rem 0.75rem 0.75rem; border-radius: 0.5rem; font-size: 1rem; }
+    .form-input::placeholder { color: #9ca3af; }
+    .form-input:disabled { opacity: 0.5; }
+    .form-input-suffix { position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+    .impact-box { padding: 1rem; background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 0.5rem; margin-bottom: 1.5rem; font-size: 0.875rem; }
+    .impact-row { display: flex; justify-content: space-between; margin-bottom: 0.25rem; }
+    .impact-row span:first-child { color: #e2e8f0; }
+    .impact-row span:last-child { color: var(--gold); font-weight: 600; }
+    .btn-red { background: #ef4444; color: white; width: 100%; }
+    .btn-red:hover { background: #dc2626; }
+    .btn-red:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* WALLET SETUP */
+    .wallet-setup { background: var(--slate-900); }
+    .security-card { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); border-radius: 0.75rem; padding: 2rem; }
+    .security-card h4 { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; margin-bottom: 1rem; }
+    .security-grid { display: grid; gap: 1.5rem; font-size: 0.875rem; }
+    @media (min-width: 768px) { .security-grid { grid-template-columns: 1fr 1fr; } }
+    .security-grid h5 { font-weight: 600; margin-bottom: 0.5rem; }
+    .security-grid ul { list-style: none; }
+    .security-grid ul li { margin-bottom: 0.25rem; color: #e2e8f0; }
+    .do-title { color: #4ade80; }
+    .dont-title { color: #f87171; }
+
+    /* WHO WE ARE */
+    .who-we-are { background: var(--slate-800); }
+    .founders-grid { display: grid; align-items: center; }
+    @media (min-width: 768px) { .founders-grid { grid-template-columns: 1fr 1fr; } }
+    .founders-text { padding: 2rem 3rem; }
+    .founders-text p { font-size: 1.125rem; color: #e2e8f0; line-height: 1.8; margin-bottom: 1.5rem; }
+    @media (min-width: 768px) { .founders-text p { font-size: 1.25rem; } }
+    .founders-text .highlight { color: #fbbf24; font-weight: 600; }
+    .founders-image img { width: 100%; height: 100%; object-fit: cover; min-height: 300px; }
+    @media (min-width: 768px) { .founders-image img { min-height: 400px; } }
+
+    /* GIVE BACK */
+    .give-back { background: var(--slate-800); }
+    .merch-card .card-body { padding: 1.5rem; }
+    .merch-image { aspect-ratio: 16/9; background: var(--slate-900); border-radius: 0.5rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .merch-image.sticker img { width: 80%; height: auto; object-fit: contain; transform: rotate(-3deg); }
+    .merch-image.cap img { width: 100%; height: 100%; object-fit: contain; }
+    .merch-info h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .merch-info p { font-size: 0.875rem; color: #cbd5e1; margin-bottom: 1rem; }
+    .merch-footer { display: flex; align-items: center; justify-content: space-between; }
+    .merch-price { color: #fbbf24; font-weight: 700; font-size: 1.125rem; }
+    .donate-card { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(51,65,85,0.4)); border: 1px solid rgba(245,158,11,0.3); border-radius: 0.75rem; padding: 2rem; margin-bottom: 4rem; }
+    .donate-inner { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+    @media (min-width: 768px) { .donate-inner { flex-direction: row; } }
+    .donate-icon { width: 80px; height: 80px; background: rgba(245,158,11,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .donate-content { flex-grow: 1; text-align: center; }
+    @media (min-width: 768px) { .donate-content { text-align: left; } }
+    .donate-content h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .donate-content p { color: #cbd5e1; margin-bottom: 1rem; }
+    .progress-bar-wrap { margin-bottom: 0.5rem; }
+    .progress-labels { display: flex; justify-content: space-between; font-size: 0.875rem; margin-bottom: 0.5rem; }
+    .progress-labels span:first-child { color: #9ca3af; }
+    .progress-labels span:last-child { color: #fbbf24; }
+    .progress-bar { height: 12px; background: var(--slate-700); border-radius: 9999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--gold); border-radius: 9999px; width: 4.9%; }
+    .contact-card { text-align: center; display: inline-block; }
+    .contact-card .card-body { padding: 2rem; }
+    .contact-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+    .contact-card p { color: #cbd5e1; max-width: 32rem; }
+    .contact-card a { color: var(--gold); font-weight: 600; }
+    .contact-card a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer { background: var(--slate-950); border-top: 1px solid var(--slate-700); padding: 3rem 0; }
+    .footer-grid { display: grid; gap: 2rem; margin-bottom: 2rem; }
+    @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+    .footer-brand { display: flex; align-items: center; margin-bottom: 1rem; }
+    .footer-brand img { width: 40px; height: 40px; border-radius: 50%; margin-right: 0.75rem; }
+    .footer-brand span { font-size: 1.875rem; font-weight: 900; }
+    .footer-desc { color: #cbd5e1; margin-bottom: 1.5rem; max-width: 28rem; }
+    .social-links { display: flex; gap: 1rem; }
+    .social-links a { color: #9ca3af; transition: color 0.2s; font-size: 1.25rem; }
+    .social-links a:hover { color: #fbbf24; }
+    footer h4 { font-weight: 600; margin-bottom: 1rem; }
+    footer ul { list-style: none; }
+    footer ul li { margin-bottom: 0.5rem; }
+    footer ul a { color: #cbd5e1; transition: color 0.2s; }
+    footer ul a:hover { color: #fbbf24; }
+    .footer-bottom { border-top: 1px solid var(--slate-700); padding-top: 2rem; text-align: center; color: #9ca3af; }
+
+    /* SVG icons inline */
+    .icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.125em; }
+    .icon-lg { width: 2rem; height: 2rem; }
+    .icon-xl { width: 2.5rem; height: 2.5rem; }
+
+    /* Mobile menu */
+    .mobile-menu-btn { display: block; background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+    @media (min-width: 768px) { .mobile-menu-btn { display: none; } }
+    .mobile-menu { display: none; background: rgba(30,41,59,0.98); position: fixed; top: 64px; left: 0; right: 0; padding: 1rem 2rem 2rem; z-index: 49; flex-direction: column; gap: 1rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #e2e8f0; font-size: 1.125rem; padding: 0.5rem 0; }
+    .mobile-menu a:hover { color: var(--gold); }
+
+    .text-center { text-align: center; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+        <img src="images/token.png" alt="undebted token">
+        <span>undebted.</span>
+      </a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#claim">Claim Tokens</a>
+        <a href="#metrics">Metrics</a>
+        <a href="#burn">Burn Tokens</a>
+        <a href="#give-back">Merch</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <a href="#claim" class="btn btn-gold">Connect Wallet</a>
+        <button class="mobile-menu-btn" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+      </div>
+    </div>
+  </div>
+</nav>
+<div id="mobile-menu" class="mobile-menu">
+  <a href="#about" onclick="this.parentElement.classList.remove('open')">About</a>
+  <a href="#claim" onclick="this.parentElement.classList.remove('open')">Claim Tokens</a>
+  <a href="#metrics" onclick="this.parentElement.classList.remove('open')">Metrics</a>
+  <a href="#burn" onclick="this.parentElement.classList.remove('open')">Burn Tokens</a>
+  <a href="#give-back" onclick="this.parentElement.classList.remove('open')">Merch</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          Tokenizing Student Debt
+        </div>
+        <h1>undebted.</h1>
+        <p>Transform your student loan burden into crypto assets. <span class="gold" style="font-weight:600;">Rise from debt.</span></p>
+        <div class="hero-buttons">
+          <a href="#claim" class="btn btn-gold btn-lg">Claim Your Tokens</a>
+          <a href="#about" class="btn btn-white btn-lg">Learn How It Works</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="images/poster.jpeg" alt="undebted token - zombie hand holding money rising from ground">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="container">
+    <h2 class="section-title">What is <span class="gold">undebted.</span>?</h2>
+    <p class="section-subtitle">Each UNDBT token represents $1 of verified U.S. federal student loan debt, creating a new asset class that empowers borrowers and enables community support. Verify your debt and we give you the tokens, that's it.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon gold-bg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d4a634" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"></circle><path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path><path d="M7 6h1v4"></path><path d="m16.71 13.88.7.71-2.82 2.82"></path></svg>
+          </div>
+          <h3>Verify & Mint</h3>
+          <p>Complete a secure credit check to verify your student loan debt and mint UNDBT tokens representing your education investment.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon gold-bg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d4a634" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <h3>Community Support</h3>
+          <p>Donors can burn UNDBT tokens to directly support borrowers, creating a decentralized student debt relief system.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon green-bg">
+            <img src="images/token.png" alt="UNDBT token" style="width:40px;height:40px;border-radius:50%;">
+          </div>
+          <h3>Education Assets</h3>
+          <p>Transform educational debt into tradeable assets, creating new financial opportunities and debt management strategies.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLAIM -->
+<section id="claim" class="claim">
+  <div class="container" style="max-width:56rem;">
+    <h2 class="section-title">Claim Your <span class="gold">UNDBT</span></h2>
+    <p class="section-subtitle">Connect your wallet and verify your student debt to mint UNDBT tokens</p>
+    <div class="claim-card">
+      <div class="card-body">
+        <img src="images/banner.png" alt="undebted banner - zombie hands rising" class="banner-img">
+
+        <!-- Step 1 -->
+        <div style="margin-bottom:3rem;">
+          <div class="step-header">
+            <div class="step-num active">1</div>
+            <h3>Connect Your Wallet</h3>
+          </div>
+          <div class="grid-2">
+            <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" style="background:rgba(51,65,85,0.6);border:2px solid var(--slate-600);border-radius:0.75rem;padding:1.5rem;display:flex;align-items:center;transition:border-color 0.2s;">
+              <div style="width:48px;height:48px;background:#f97316;border-radius:0.75rem;display:flex;align-items:center;justify-content:center;margin-right:1rem;flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M15 2v2"></path><path d="M15 20v2"></path><path d="M2 15h2"></path><path d="M2 9h2"></path><path d="M20 15h2"></path><path d="M20 9h2"></path><path d="M9 2v2"></path><path d="M9 20v2"></path></svg>
+              </div>
+              <div>
+                <div style="font-weight:600;">MetaMask</div>
+                <div style="font-size:0.875rem;color:#cbd5e1;">Most popular wallet</div>
+              </div>
+            </a>
+            <a href="https://wallet.coinbase.com" target="_blank" rel="noopener noreferrer" style="background:rgba(51,65,85,0.6);border:2px solid var(--slate-600);border-radius:0.75rem;padding:1.5rem;display:flex;align-items:center;transition:border-color 0.2s;">
+              <div style="width:48px;height:48px;background:#3b82f6;border-radius:0.75rem;display:flex;align-items:center;justify-content:center;margin-right:1rem;flex-shrink:0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"></path></svg>
+              </div>
+              <div>
+                <div style="font-weight:600;">Coinbase Wallet</div>
+                <div style="font-size:0.875rem;color:#cbd5e1;">Coinbase's L2 solution</div>
+              </div>
+            </a>
+          </div>
+          <div class="info-box amber mt-4">
+            <div style="display:flex;align-items:center;color:#fef3c7;font-size:0.875rem;">
+              <div style="width:16px;height:16px;border-radius:50%;background:#fbbf24;margin-right:0.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-size:0.625rem;color:black;">i</span></div>
+              Don't have a wallet? <a href="#wallet-setup" style="color:#fbbf24;margin-left:0.25rem;">Learn how to set one up</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div style="margin-bottom:3rem;">
+          <div class="step-header">
+            <div class="step-num inactive">2</div>
+            <h3 style="color:#9ca3af;">Verify Your Student Debt</h3>
+          </div>
+          <div class="dashed-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <div style="color:#9ca3af;margin-bottom:0.5rem;">Connect wallet first to verify your student debt</div>
+            <div style="font-size:0.875rem;color:#6b7280;">Secure verification through credit bureau</div>
+          </div>
+          <p style="color:#cbd5e1;font-size:0.875rem;margin-top:1rem;">Why a credit check? Cuz we don't want people who don't actually have debt cashing in. Use this third party app to safely and securely verify how much debt you hold.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div>
+          <div class="step-header">
+            <div class="step-num inactive">3</div>
+            <h3 style="color:#9ca3af;">Mint UNDBT Tokens</h3>
+          </div>
+          <div style="background:rgba(51,65,85,0.6);border:1px solid var(--slate-600);border-radius:0.75rem;padding:2rem;text-align:center;">
+            <div style="color:#9ca3af;">Complete previous steps to mint your UNDBT tokens</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<section id="metrics" class="metrics">
+  <div class="container">
+    <h2 class="section-title">Project <span class="gold">Impact</span></h2>
+    <p class="section-subtitle">Real-time metrics showing the undebted. ecosystem's growth and impact</p>
+    <div class="grid-4 mb-12">
+      <div class="card metric-card">
+        <div class="card-body">
+          <div class="metric-value">2,400,000</div>
+          <div class="metric-label">UNDBT Tokens Minted</div>
+          <div class="metric-change">+12.5% this week</div>
+        </div>
+      </div>
+      <div class="card metric-card">
+        <div class="card-body">
+          <div class="metric-value">8,749</div>
+          <div class="metric-label">Verified Borrowers</div>
+          <div class="metric-change">+234 this week</div>
+        </div>
+      </div>
+      <div class="card metric-card">
+        <div class="card-body">
+          <div class="metric-value">$892K</div>
+          <div class="metric-label">Student Debt Verified</div>
+          <div class="metric-change">+$21K this week</div>
+        </div>
+      </div>
+      <div class="card metric-card">
+        <div class="card-body">
+          <div class="metric-value">456,000</div>
+          <div class="metric-label">Tokens Burned by Donors</div>
+          <div class="metric-change">+18.7% this week</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-body">
+          <h3 style="font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;">Debt Distribution by State</h3>
+          <div class="distribution-bar"><span>California</span><div class="bar-container"><div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div><span class="bar-value">$12.4M</span></div></div>
+          <div class="distribution-bar"><span>New York</span><div class="bar-container"><div class="bar-bg"><div class="bar-fill" style="width:63%"></div></div><span class="bar-value">$9.8M</span></div></div>
+          <div class="distribution-bar"><span>Texas</span><div class="bar-container"><div class="bar-bg"><div class="bar-fill" style="width:50%"></div></div><span class="bar-value">$7.2M</span></div></div>
+          <div class="distribution-bar"><span>Florida</span><div class="bar-container"><div class="bar-bg"><div class="bar-fill" style="width:44%"></div></div><span class="bar-value">$6.1M</span></div></div>
+          <div class="distribution-bar"><span>Pennsylvania</span><div class="bar-container"><div class="bar-bg"><div class="bar-fill" style="width:38%"></div></div><span class="bar-value">$5.3M</span></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h3 style="font-size:1.5rem;font-weight:700;margin-bottom:1.5rem;">Recent Activity</h3>
+          <div class="activity-item"><div class="activity-left"><div class="activity-dot green"></div><div><div class="activity-type">Token Mint</div><div class="activity-addr">0x7a3f...8b2c</div></div></div><div class="text-green" style="font-weight:600;">+45,000 UNDBT</div></div>
+          <div class="activity-item"><div class="activity-left"><div class="activity-dot red"></div><div><div class="activity-type">Token Burn</div><div class="activity-addr">0x9c2e...4f1a</div></div></div><div class="text-red" style="font-weight:600;">-12,500 UNDBT</div></div>
+          <div class="activity-item"><div class="activity-left"><div class="activity-dot amber"></div><div><div class="activity-type">New Borrower</div><div class="activity-addr">0x1b5d...7e3f</div></div></div><div class="text-amber" style="font-weight:600;">+28,000 UNDBT</div></div>
+          <div class="activity-item"><div class="activity-left"><div class="activity-dot green"></div><div><div class="activity-type">Token Mint</div><div class="activity-addr">0x4e8a...2d9c</div></div></div><div class="text-green" style="font-weight:600;">+67,500 UNDBT</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BURN -->
+<section id="burn" class="burn">
+  <div class="container" style="max-width:56rem;">
+    <h2 class="section-title">Support <span class="gold">Students</span></h2>
+    <p class="section-subtitle">Burn UNDBT tokens to directly support borrowers and reduce student debt burden</p>
+    <div class="claim-card">
+      <div class="card-body">
+        <div class="burn-grid">
+          <div>
+            <h3 style="font-size:1.875rem;font-weight:700;margin-bottom:1.5rem;">How Token Burning Works</h3>
+            <div class="burn-step"><div class="burn-step-num">1</div><div><div class="burn-step-title">Purchase UNDBT Tokens</div><div class="burn-step-desc">Buy UNDBT tokens from the market or receive them as donations</div></div></div>
+            <div class="burn-step"><div class="burn-step-num">2</div><div><div class="burn-step-title">Select Burn Amount</div><div class="burn-step-desc">Choose how many tokens you want to burn to support students</div></div></div>
+            <div class="burn-step"><div class="burn-step-num">3</div><div><div class="burn-step-title">Direct Impact</div><div class="burn-step-desc">Your burned tokens directly reduce the debt burden of verified borrowers</div></div></div>
+          </div>
+          <div class="burn-form">
+            <h4>Burn UNDBT Tokens</h4>
+            <div class="form-label">Your Wallet Balance</div>
+            <div class="form-display"><div class="value">0 UNDBT</div><div class="label">Connect wallet to view balance</div></div>
+            <div class="form-label">Tokens to Burn</div>
+            <div class="form-input-wrap"><input type="number" class="form-input" placeholder="Enter amount" disabled><div class="form-input-suffix">UNDBT</div></div>
+            <div class="impact-box"><div class="impact-row"><span>Impact:</span><span>$0 debt relief</span></div><div class="impact-row"><span>Students helped:</span><span>0</span></div></div>
+            <button class="btn btn-red" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.5rem;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>
+              Connect Wallet to Burn Tokens
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WALLET SETUP -->
+<section id="wallet-setup" class="wallet-setup">
+  <div class="container" style="max-width:56rem;">
+    <h2 class="section-title">New to <span class="gold">Crypto</span>?</h2>
+    <p class="section-subtitle">Don't worry! We'll help you get started with your first wallet</p>
+    <div class="grid-2 mb-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon orange-bg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M15 2v2"></path><path d="M15 20v2"></path><path d="M2 15h2"></path><path d="M2 9h2"></path><path d="M20 15h2"></path><path d="M20 9h2"></path><path d="M9 2v2"></path><path d="M9 20v2"></path></svg>
+          </div>
+          <h3>MetaMask Wallet</h3>
+          <p>The most popular Ethereum wallet. Easy to install as a browser extension and perfect for beginners.</p>
+          <a href="https://metamask.io" target="_blank" rel="noopener noreferrer" class="gold" style="display:inline-flex;align-items:center;font-weight:600;margin-top:1rem;">
+            Download MetaMask
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:0.5rem;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon blue-bg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0-2 2c0 1.1.9 2 2 2h4v-4h-4z"></path></svg>
+          </div>
+          <h3>Coinbase Wallet</h3>
+          <p>User-friendly wallet by Coinbase with built-in support for Base network and easy fiat on-ramps.</p>
+          <a href="https://wallet.coinbase.com" target="_blank" rel="noopener noreferrer" class="gold" style="display:inline-flex;align-items:center;font-weight:600;margin-top:1rem;">
+            Get Coinbase Wallet
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:0.5rem;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="security-card">
+      <h4>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a634" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.75rem;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        Security First
+      </h4>
+      <div class="security-grid">
+        <div><h5 class="do-title">Do This:</h5><ul><li>Write down your seed phrase offline</li><li>Store it in a secure location</li><li>Never share it with anyone</li><li>Use strong passwords</li></ul></div>
+        <div><h5 class="dont-title">Never Do This:</h5><ul><li>Share your private keys</li><li>Store seed phrases digitally</li><li>Click suspicious links</li><li>Connect to unknown websites</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section id="who-we-are" class="who-we-are">
+  <div class="container" style="max-width:64rem;">
+    <h2 class="section-title">Who <span class="gold">We Are</span></h2>
+    <div class="card" style="overflow:hidden;">
+      <div class="founders-grid">
+        <div class="founders-text">
+          <p>Graham and Jon are two smart mofos, just like you. Unfortunately (also just like you) nobody told us our education loans were going to screw us for the rest of our lives.</p>
+          <p>This is a non-profit project aimed at helping us all get out from under the heel of a predatory loan system. We don't benefit any more than anyone else who joins up will benefit.</p>
+          <p class="highlight">We are all in this together, let's turn this around and show them what we're made of.</p>
+        </div>
+        <div class="founders-image">
+          <img src="images/founders.jpeg" alt="Graham and Jon - undebted founders">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GIVE BACK -->
+<section id="give-back" class="give-back">
+  <div class="container" style="max-width:72rem;">
+    <h2 class="section-title"><span class="gold">Support the Cause</span></h2>
+    <p class="section-subtitle">We've still got jobs, but we're doing this because we care deeply about this issue and feel like we can make a difference. Would you like to contribute directly to the cause? You can do so by buying some of our rad merch, or donating to our GoFundMe.</p>
+
+    <div class="grid-2 mb-12">
+      <div class="card merch-card">
+        <div class="card-body">
+          <div class="merch-image sticker"><img src="images/bumper.png" alt="undebted bumper sticker"></div>
+          <div class="merch-info">
+            <h3>undebted. Bumper Sticker</h3>
+            <p>Show your support on your ride. 3" x 11" vinyl sticker.</p>
+            <div class="merch-footer"><span class="merch-price">$5.00</span><span class="btn btn-outline">Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card merch-card">
+        <div class="card-body">
+          <div class="merch-image cap"><img src="images/trucker.png" alt="undebted zombie trucker cap"></div>
+          <div class="merch-info">
+            <h3>Zombie Trucker Cap</h3>
+            <p>Rep the movement. Adjustable mesh back trucker hat.</p>
+            <div class="merch-footer"><span class="merch-price">$40.00</span><span class="btn btn-outline">Coming Soon</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="donate-card">
+      <div class="donate-inner">
+        <div class="donate-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+        </div>
+        <div class="donate-content">
+          <h3>Support Our Mission</h3>
+          <p>Help us build the future of student debt relief</p>
+          <div class="progress-bar-wrap">
+            <div class="progress-labels"><span>$2,450 raised</span><span>$50,000 goal</span></div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+          </div>
+        </div>
+        <div style="flex-shrink:0;">
+          <a href="https://gofundme.com" target="_blank" rel="noopener noreferrer" class="btn btn-gold" style="padding:0.75rem 2rem;font-weight:700;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:0.5rem;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            Donate on GoFundMe
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <div class="card contact-card" style="display:inline-block;">
+        <div class="card-body">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+          <h3>Got Mad Skills?</h3>
+          <p>Want to help out? Email us at <a href="mailto:undebted@gmail.com">undebted@gmail.com</a> along with how you think you can help the project!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="images/token.png" alt="undebted token">
+          <span>undebted.</span>
+        </div>
+        <p class="footer-desc">Transforming student debt into community-supported assets through blockchain technology and collective action. Rise from debt.</p>
+        <div class="social-links">
+          <a href="https://x.com/UndebtedToken" target="_blank" rel="noopener noreferrer" aria-label="X/Twitter">𝕏</a>
+          <a href="https://www.instagram.com/undebted/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+          <a href="https://www.youtube.com/@Undebted" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
+          <a href="https://www.tiktok.com/@undebted" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TT</a>
+        </div>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="whitepaper.html">Whitepaper</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 undebted. Token Project. This is a demonstration MVP - all blockchain interactions are simulated.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll', function() {
+  var nav = document.getElementById('navbar');
+  if (window.scrollY > 0) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+});
+</script>
+</body>
+</html>
